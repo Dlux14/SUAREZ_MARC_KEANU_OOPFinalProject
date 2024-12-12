@@ -1,61 +1,35 @@
-QuizMaster Application - README
+# QuizMaster
 
-Overview
-The QuizMaster Application is a Java-based command-line program that allows users to manage quiz topics, questions, and conduct quizzes interactively. It integrates with a MySQL database to store and retrieve data efficiently.
+QuizMaster is a Java-based quiz application that allows users to manage quiz topics and questions, take quizzes, and view their results. The application uses a MySQL database to store topics and questions.
 
-Features
-Add Topic: Create and store new quiz topics in the database.
+## Features
 
-Add Question: Add questions under a specific topic. 
+- **Add Topics**: Create new quiz topics.
+- **Add Questions**: Add questions to existing topics with different types (Identification, True/False).
+- **Take Quizzes**: Take quizzes based on selected topics and receive scores.
+- **View Questions**: View all questions associated with a specific topic.
+- **View Topics**: List all available quiz topics.
+- **Remove Topics**: Delete topics and their associated questions.
+- **Remove Questions**: Delete specific questions from a topic.
 
-Supports:Identification questions
-True/False questions
+## Requirements
 
+- Java Development Kit (JDK) 8 or higher
+- MySQL Database
+- MySQL Connector/J (JDBC Driver)
 
-Take Quiz: Attempt a randomized quiz for a chosen topic with a customizable number of questions.
+## Setup
 
-View Topics: List all available quiz topics.
+1. **Clone the repository** (or download the source code):
+   ```bash
+   git clone https://github.com/yourusername/QuizMaster.git
+   cd QuizMaster
 
-View Questions: Display questions and their correct answers for a selected topic.
+## Set up MySQL Database:
 
-Remove Topic: Delete a topic along with all associated questions.
-
-Remove Question: Delete specific questions from the database.
-
-Exit: Close the application gracefully.
-
-Prerequisites
-Java: Java Development Kit (JDK) installed on your system.
-MySQL Database: MySQL server running with the required database (mydb) and tables set up.
-JDBC Driver: Include the MySQL JDBC driver in your project to enable database connectivity.
-Database Schema
-
-Topics Table:
-id (INT, Primary Key): Unique identifier for topics.
-name (VARCHAR): Name of the topic.
-
-Questions Table:
-id (INT, Primary Key): Unique identifier for questions.
-topic_id (INT, Foreign Key): References id in the Topics table.
-question_text (VARCHAR): The text of the question.
-question_type (INT): Type of question (1 for Identification, 2 for True/False).
-answer (VARCHAR): The correct answer for the question.
-
-
-How to Set Up
-Clone the Repository:
-
-
-Copy code
-[git clone https://github.com/your-username/quizmaster.git](https://github.com/Dlux14/SUAREZ_MARC_KEANU_OOPFinalProject.git)
-cd quizmaster
-
-Set Up the Database:
-
-Create a database in MySQL named mydb (or update the name in the code if different).
-Execute the following SQL commands to create the required tables:
+Create a database named mydb (or change the DB_URL in the code to match your database name).
+### Create the following tables:
 sql
-Copy code
 
 CREATE TABLE Topics (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -64,45 +38,43 @@ CREATE TABLE Topics (
 
 CREATE TABLE Questions (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    topic_id INT NOT NULL,
-    question_text VARCHAR(255) NOT NULL,
-    question_type INT NOT NULL,
-    answer VARCHAR(255) NOT NULL,
-    FOREIGN KEY (topic_id) REFERENCES Topics(id)
+    topic_id INT,
+    question_text TEXT NOT NULL,
+    question_type INT NOT NULL,  -- 1 for Identification, 2 for True/False
+    answer TEXT NOT NULL,
+    FOREIGN KEY (topic_id) REFERENCES Topics(id) ON DELETE CASCADE
 );
-Update Database Credentials:
+## Configure Database Connection:
 
-Open the QuizMaster.java file and update these constants:
-java
-Copy code
-private static final String DB_URL = "jdbc:mysql://localhost:3306/mydb";
-private static final String DB_USER = "your-username";
-private static final String DB_PASSWORD = "your-password";
-Compile the Program:
+Update the DB_URL, DB_USER, and DB_PASSWORD constants in the QuizMaster class to match your MySQL database credentials.
+Compile and Run:
 
+### Compile the Java file:
 
-Copy code
 javac QuizMaster.java
-Run the Program:
+Run the application:
 
+## Usage
+#### Add Topic:
+Select option 1 to add a new topic.
+#### Add Question:
+Select option 2 to add a question to an existing topic.
+### Take Quiz:
+Select option 3 to take a quiz based on a specific topic.
+### View Questions:
+Select option 4 to view all questions for a specific topic.
+### View Topics:
+Select option 5 to list all available topics.
+### Remove Topic: 
+Select option 6 to remove a topic and its questions.
+### Remove Question:
+Select option 7 to remove a specific question.
+### Exit:
+Select option 8 to exit the application.
 
-Copy code
-java QuizMaster
-Usage
-Follow the on-screen menu to perform the following actions:
+## License
+This project is licensed under the MIT License. See the LICENSE file for details.
 
-Add topics and questions.
-Take quizzes with automatic scoring.
-View or delete topics and questions.
-Contributions
-Contributions are welcome! If you'd like to improve the project:
-
-Fork the repository.
-Create a new branch (feature/new-feature).
-Commit your changes.
-Submit a pull request for review.
-
-License
-This project is open-source and available under the MIT License.
-
-Enjoy using QuizMaster! 🚀
+## Acknowledgments
+MySQL for the database management system.
+Java for the programming language.
